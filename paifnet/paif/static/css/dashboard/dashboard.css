@@ -1,0 +1,36 @@
+.info-box {
+    color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+    opacity: 0;
+    animation: slideInFromLeft 1s forwards;
+}
+
+/* Animação de slide in para as info-boxes */
+@keyframes slideInFromLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.info-box h3 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.info-box p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+}
+
+.bg-orange { background-color: #FF914D; }
+.bg-green { background-color: #4CAF50; }
+.bg-blue { background-color: #2196F3; }
+
+.info-box-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}

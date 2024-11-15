@@ -1,12 +1,99 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-  </head>
-  <body>
-    <h1>Tela de Dashboard</h1> 
-    <p>Bem-vindo! {{ nome }}</p>
-  </body>
-</html>
+{% extends 'includes/base.html' %}
+
+{% block title %}PAIFNet | Painel{% endblock %}
+{% block extra_css %}
+    {%load static%}
+    <link href="{% static 'css/dashboard/dashboard.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Painel dos Grupos PAIF</h1>
+        <p>Bem-vindo, <strong>{{ nome }}</strong>!</p>
+    </div>
+
+    <div class="container">
+        <div class="info-box-container">
+            <div class="info-box bg-orange">
+                <h3>150</h3>
+                <p>Total de Participantes</p>
+            </div>
+            <div class="info-box bg-green">
+                <h3>6</h3>
+                <p>Total de Grupos Ativos</p>
+            </div>
+            <div class="info-box bg-blue">
+                <h3>20</h3>
+                <p>Pessoas na Lista de Espera</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <canvas id="allGroupsChart"></canvas>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('allGroupsChart').getContext('2d');
+
+        const groupData = {
+            "Grupo de Dança e Movimento": { days: ['Qua', 'Sex'], data: [40, 50], color: '#FF914D' },
+            "Grupo de Câmbio": { days: ['Ter', 'Qui'], data: [30, 35], color: '#4CAF50' },
+            "Grupo da Terceira Idade (Manhã)": { days: ['Ter'], data: [25], color: '#2196F3' },
+            "Grupo da Terceira Idade (Tarde)": { days: ['Ter'], data: [20], color: '#FFC107' },
+            "Grupo de Gestantes": { days: ['Qua'], data: [15], color: '#E91E63' }
+        };
+
+        const weekDays = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+
+        const datasets = Object.keys(groupData).map(groupName => {
+            const group = groupData[groupName];
+            const data = weekDays.map(day => {
+                const index = group.days.indexOf(day);
+                return index !== -1 ? group.data[index] : 0;
+            });
+
+            return {
+                label: groupName,
+                data: data,
+                backgroundColor: group.color,
+                borderColor: group.color,
+                borderWidth: 1
+            };
+        });
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: weekDays,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Dias da Semana'
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        title: {
+                            display: true,
+                            text: 'Frequência'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}

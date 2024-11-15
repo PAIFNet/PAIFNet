@@ -2,19 +2,35 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from firebase_admin import firestore
+from paifnet.utils.decorators import verificar_cookie
 
 db = firestore.client()
 
-# Direcionar o usuário para tela de login
 def login(request):
     return render(request, 'login/login.html')
 
-# Direcionar o usuário para tela de Recuperação de Senha 
 def recuperar(request):
     return render(request, 'recuperar/recuperar-senha.html')
 
+@verificar_cookie
 def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
+    return render(request, 'dashboard/dashboard.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def participantes(request):
+    return render(request, 'participantes/participantes.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def grupos(request):
+    return render(request, 'grupos/grupos.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def frequencia(request):
+    return render(request, 'frequencia/frequencia.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def lista_de_espera(request):
+    return render(request, 'lista_espera/lista_de_espera.html', {'nome': request.nome, 'usuario': request.usuario})
 
 # Verificar login dos usuários
 @csrf_exempt
@@ -46,9 +62,8 @@ def verificar_login(request):
         # Caso o método não seja POST, renderiza a página de login normalmente
         return render(request, 'login.html')
 
-def dashboard(request):
-    nome = request.COOKIES.get('nome')
-    if nome:
-        return render(request, 'dashboard/dashboard.html', {'nome': nome})
-    else:
-        return redirect('/login/')
+def logout(request):
+    response = redirect('/')
+    response.delete_cookie('usuario')
+    response.delete_cookie('nome')
+    return response

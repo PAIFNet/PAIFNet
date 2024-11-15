@@ -132,6 +132,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
 
     BASE_DIR / "paif/static",
+    BASE_DIR / "paif/utils"
 ]
 
 # Default primary key field type
