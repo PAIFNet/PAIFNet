@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PAIFNet | Recupear Senha</title>
+    {% load static %}
+    <link href="{% static 'css/recuperar/recuperar-senha.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="centralizada">
+      <img src="{% static 'images/icones/lockIcon.png' %}" id="icone" name="icone">
+      <div class="content">
+        <h1 id="titulo">Esqueceu sua senha?</h1>
+        <h2 id="subtitulo">Insira seu email para receber o código de verificação<h2>
+        <input type="email" placeholder="E-mail" class="input-email" id="input-email">
+        <div class="div-botao">
+          <button id="btn-entrar">Enviar Código</button>
+        </div>
+        <a href="/" id="retornar">
+          <img src="{% static '/images/icones/arrow-left.png' %}">
+          <p id="retornar-txt">Retornar para tela de login</p>
+        <a>
+      </div>
+    </div>
+  </body>
+</html>

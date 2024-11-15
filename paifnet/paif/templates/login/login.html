@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PAIFNet | Login</title>
+    {% load static %}
+    <link href="{% static 'css/login/login.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="centralizada">
+      <img id="logo" src="{% static '/images/logo.png' %}" alt="Logo CRAS">
+      <div class="conteudo">
+        <h1 id="texto-login">Login</h1>
+        <form action="{% url 'verificar_login' %}" method="POST" class="form-login">
+          {% csrf_token %}
+          <input type="text" placeholder="Usuário" class="input-login" name="usuario" required>
+          <input type="password" placeholder="Senha" class="input-login" name="senha" required>
+          <div class="opcoes-login">
+            <div>
+              <input type="checkbox" name="lembrar" id="lembrar">
+              <label id="label-lembrar" for="lembrar">Lembrar-me depois</label>
+            </div>
+            <a id="recuperar-senha" href="/recuperar-senha/">Esqueci minha senha</a>
+          </div>
+          <div class="div-botao">
+            <button id="btn-entrar" type="submit">Entrar</button>
+          </div>
+        </form>
+      <div>
+    </div>
+  </body>
+</html>

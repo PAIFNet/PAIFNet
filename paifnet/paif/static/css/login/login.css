@@ -1,0 +1,113 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0; 
+}
+
+.centralizada {
+    width: 400px;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+/* Estilização Logo CRAS */
+#logo {
+    width: 200px;
+    height: 170px;
+    border-radius: 100%;
+    position: absolute; 
+    top: -80px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    z-index: 1; 
+}
+
+/* Efeito de afundar */
+.centralizada:hover {
+    transform: translateY(5px); 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  gap: 20px;
+}
+
+#texto-login {  
+  text-align: center;
+  font-size: 29px;
+  margin-top: 25%;
+}
+
+.form-login {
+  margin-left: 8%;
+}
+
+.input-login {
+  width: 300px;
+  margin-top: 10px;
+  padding: 12px 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.opcoes-login {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+}
+
+#label-lembrar {
+  font-size: 14px;
+  font-weight: lighter;
+  color: gray;
+}
+
+#recuperar-senha {
+  font-size: 14px;
+  margin-left: 25%;
+  text-decoration: underline;
+  color: gray;
+}
+
+.div-botao {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+
+#btn-entrar {
+  margin-top: 10%;
+  width: 70%;
+  padding: 5%;
+  height: 100%;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  text-decoration: bold;
+  cursor: pointer;
+}
+
+#btn-entrar:hover {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
