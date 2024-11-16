@@ -11,4 +11,6 @@ urlpatterns = [
     path('grupos/', grupos, name="grupos"),
     path('frequencia/', frequencia, name="frequencia"),
     path('lista-de-espera/', lista_de_espera, name="lista-de-espera"),
+    path('suporte/', suporte , name="suporte"),
+    path('form_suporte/', form_suporte , name="form_suporte")
 ]

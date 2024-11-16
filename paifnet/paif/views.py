@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from firebase_admin import firestore
 from paifnet.utils.decorators import verificar_cookie
+import firebase_admin
+from firebase_admin import credentials
 
 db = firestore.client()
 
@@ -31,6 +33,41 @@ def frequencia(request):
 @verificar_cookie
 def lista_de_espera(request):
     return render(request, 'lista_espera/lista_de_espera.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def suporte(request):
+    return render(request, 'suporte/suporte.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def form_suporte(request):
+    return render(request, 'form_suporte/form_suporte.html', {'nome': request.nome, 'usuario': request.usuario})
+
+@verificar_cookie
+def form_suporte(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        telefone = request.POST.get('telefone')
+        problema = request.POST.get('problema')
+
+        try:
+            # Salvar no Firestore na coleção "suporte"
+            db.collection("suporte").add({
+                'id': "testeid",
+                'nome': nome,
+                'email': email,
+                'telefone': telefone,
+                'problema': problema,
+            })
+
+            # Após salvar, redireciona para uma página de confirmação ou sucesso
+            return render(request, 'form_suporte/sucesso.html', {'nome': nome})
+        except Exception as e:
+            print(f"Erro ao salvar no Firestore: {e}")
+            return render(request, 'form_suporte/form_suporte.html', {'erro': "Erro ao salvar o relato, tente novamente."})
+
+    # Se o método não for POST, renderiza o formulário normalmente
+    return render(request, 'form_suporte/form_suporte.html', {'nome': request.nome, 'usuario': request.usuario})
 
 # Verificar login dos usuários
 @csrf_exempt

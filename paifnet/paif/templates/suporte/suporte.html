@@ -1,0 +1,40 @@
+{% extends 'includes/base.html' %}
+
+{% block title %}PAIFNet | Ajuda e Suporte {% endblock %}
+{% block extra_css %}
+    {%load static%}
+    <link href="{% static 'css/suporte/suporte.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<body class="body-suporte">
+    
+<br>
+    <h4>Como podemos te ajudar? </h4>
+    <div class="container-suporte">
+
+        <div class="clickable-table">
+            <a href="https://drive.google.com/file/d/1Dvilr0fdeqVUR85cPcGXGnT5egU2otmr/view?usp=drive_link" target="_blank" class="table-row">
+                <div class="img">
+                    <img src="../../static/images/documentacao.png" alt="">
+                </div>
+                <div class="text-content">
+                    <h3>Documentação</h3>
+                    <p>Guias de uso do sistema, FAQs. </p>
+                </div>
+            </a>
+            <a href="{% url 'form_suporte' %}" class="table-row">
+                <div class="img">
+                    <img src="../../static/images/suporte.png" alt="">
+                </div>
+                <div class="text-content">
+                    <h3>Suporte</h3>
+                    <p>Formulário para contato com suporte, Informações de contato.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
